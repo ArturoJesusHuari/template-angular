@@ -1,0 +1,264 @@
+// TEMA OSCURO GLOBAL - SUPABASE-LIKE
+// Paleta sobria y profesional para aplicaciones enterprise
+@use '@angular/material' as mat;
+
+// Definición de paleta personalizada verde sobrio (Supabase-inspired)
+$custom-green-palette: (
+  0: #000000,
+  10: #001f0f,
+  20: #003820,
+  25: #004528,
+  30: #005230,
+  35: #006039,
+  40: #006e42,
+  50: #008a54,
+  60: #00a766,
+  70: #3dc57f,
+  80: #5ee299,
+  90: #7cffb4,
+  95: #c4ffd9,
+  98: #e9fff0,
+  99: #f5fff8,
+  100: #ffffff,
+);
+
+// Paleta de grises oscuros para superficies
+$custom-neutral-palette: (
+  0: #000000,
+  10: #1a1a1a,
+  20: #1f1f1f,
+  25: #242424,
+  30: #2a2a2a,
+  35: #2f2f2f,
+  40: #353535,
+  50: #474747,
+  60: #5c5c5c,
+  70: #757575,
+  80: #8f8f8f,
+  90: #e0e0e0,
+  95: #f0f0f0,
+  98: #fafafa,
+  99: #fcfcfc,
+  100: #ffffff,
+);
+
+html {
+  height: 100%;
+  
+  // Configuración de tema oscuro con Material 3
+  @include mat.theme((
+    color: (
+      theme-type: dark,
+      primary: $custom-green-palette,
+      tertiary: $custom-neutral-palette,
+    ),
+    typography: (
+      brand-family: 'Inter, Roboto, sans-serif',
+      plain-family: 'Inter, Roboto, sans-serif',
+    ),
+    density: 0,
+  ));
+  
+  // Variables CSS personalizadas para tema Supabase-like
+  --bg-primary: #0f0f0f;           // Fondo principal (casi negro)
+  --bg-surface: #1a1a1a;           // Superficies (cards, panels)
+  --bg-surface-hover: #242424;     // Hover en superficies
+  --bg-input: #1f1f1f;             // Fondo de inputs
+  --bg-input-focus: #242424;       // Fondo de inputs en focus
+  
+  --border-subtle: #2a2a2a;        // Bordes sutiles
+  --border-default: #353535;       // Bordes por defecto
+  --border-focus: #3dc57f;         // Bordes en focus (accent verde)
+  
+  --text-primary: #f0f0f0;         // Texto principal (alto contraste)
+  --text-secondary: #a0a0a0;       // Texto secundario
+  --text-tertiary: #707070;        // Texto terciario (hints, placeholders)
+  --text-disabled: #505050;        // Texto deshabilitado
+  
+  --accent-primary: #3dc57f;       // Accent verde sobrio (acciones primarias)
+  --accent-hover: #5ee299;         // Accent hover
+  --accent-pressed: #00a766;       // Accent pressed
+  
+  --error: #ff5555;                // Error
+  --warning: #ffb86c;              // Warning
+  --success: #3dc57f;              // Success
+  
+  --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.3);
+  --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.4);
+  --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.5);
+}
+
+body {
+  color-scheme: dark;
+  
+  background-color: var(--bg-primary);
+  color: var(--text-primary);
+  font-family: 'Inter', 'Roboto', sans-serif;
+  
+  margin: 0;
+  height: 100%;
+  
+  // Sobrescribir variables de Material para consistencia
+  --mat-sys-surface: var(--bg-surface);
+  --mat-sys-on-surface: var(--text-primary);
+  --mat-sys-primary: var(--accent-primary);
+}
+
+// ========================================
+// BOTONES - DIFERENCIACIÓN CLARA
+// ========================================
+
+// PRIMARY - Acción principal (verde brillante)
+.mat-mdc-raised-button.mat-primary,
+.mat-mdc-unelevated-button.mat-primary,
+.mat-mdc-flat-button.mat-primary {
+  --mdc-filled-button-container-color: #3dc57f !important;
+  --mdc-filled-button-label-text-color: #000000 !important;
+  background-color: #3dc57f !important;
+  color: #000000 !important;
+  font-weight: 600;
+  box-shadow: 0 2px 4px rgba(61, 197, 127, 0.3);
+  
+  &:hover:not([disabled]) {
+    --mdc-filled-button-container-color: #5ee299 !important;
+    background-color: #5ee299 !important;
+    box-shadow: 0 4px 8px rgba(61, 197, 127, 0.4);
+  }
+  
+  &:active:not([disabled]) {
+    --mdc-filled-button-container-color: #00a766 !important;
+    background-color: #00a766 !important;
+  }
+  
+  &[disabled] {
+    opacity: 0.4;
+    box-shadow: none;
+  }
+}
+
+// ACCENT - Acción secundaria importante (azul)
+.mat-mdc-raised-button.mat-accent,
+.mat-mdc-unelevated-button.mat-accent,
+.mat-mdc-flat-button.mat-accent {
+  --mdc-filled-button-container-color: #3b82f6 !important;
+  --mdc-filled-button-label-text-color: #ffffff !important;
+  background-color: #3b82f6 !important;
+  color: #ffffff !important;
+  font-weight: 600;
+  box-shadow: 0 2px 4px rgba(59, 130, 246, 0.3);
+  
+  &:hover:not([disabled]) {
+    --mdc-filled-button-container-color: #60a5fa !important;
+    background-color: #60a5fa !important;
+    box-shadow: 0 4px 8px rgba(59, 130, 246, 0.4);
+  }
+  
+  &:active:not([disabled]) {
+    --mdc-filled-button-container-color: #2563eb !important;
+    background-color: #2563eb !important;
+  }
+  
+  &[disabled] {
+    opacity: 0.4;
+    box-shadow: none;
+  }
+}
+
+// WARN - Acciones destructivas (rojo)
+.mat-mdc-raised-button.mat-warn,
+.mat-mdc-unelevated-button.mat-warn,
+.mat-mdc-flat-button.mat-warn {
+  --mdc-filled-button-container-color: #ef4444 !important;
+  --mdc-filled-button-label-text-color: #ffffff !important;
+  background-color: #ef4444 !important;
+  color: #ffffff !important;
+  font-weight: 600;
+  box-shadow: 0 2px 4px rgba(239, 68, 68, 0.3);
+  
+  &:hover:not([disabled]) {
+    --mdc-filled-button-container-color: #f87171 !important;
+    background-color: #f87171 !important;
+    box-shadow: 0 4px 8px rgba(239, 68, 68, 0.4);
+  }
+  
+  &:active:not([disabled]) {
+    --mdc-filled-button-container-color: #dc2626 !important;
+    background-color: #dc2626 !important;
+  }
+  
+  &[disabled] {
+    opacity: 0.4;
+    box-shadow: none;
+  }
+}
+
+// STROKED - Botones con borde (contraste real en tema oscuro)
+.mat-mdc-outlined-button {
+  --mdc-outlined-button-outline-color: var(--border-default) !important;
+  --mdc-outlined-button-label-text-color: var(--text-primary) !important;
+  border: 1px solid var(--border-default) !important;
+  color: var(--text-primary) !important;
+  background-color: transparent !important;
+  
+  &:hover:not([disabled]) {
+    --mdc-outlined-button-outline-color: var(--accent-primary) !important;
+    border-color: var(--accent-primary) !important;
+    background-color: rgba(61, 197, 127, 0.1) !important;
+  }
+  
+  &:active:not([disabled]) {
+    background-color: rgba(61, 197, 127, 0.2) !important;
+  }
+  
+  &[disabled] {
+    opacity: 0.4;
+  }
+}
+
+// BASIC - Botones sin fondo
+.mat-mdc-button {
+  --mdc-text-button-label-text-color: var(--text-primary) !important;
+  color: var(--text-primary) !important;
+  
+  &:hover:not([disabled]) {
+    background-color: var(--bg-surface-hover) !important;
+  }
+  
+  &[disabled] {
+    opacity: 0.4;
+  }
+}
+
+// ICON BUTTONS
+.mat-mdc-icon-button {
+  --mdc-icon-button-icon-color: var(--text-primary) !important;
+  color: var(--text-primary) !important;
+  
+  &:hover:not([disabled]) {
+    background-color: var(--bg-surface-hover) !important;
+  }
+  
+  &.mat-primary {
+    --mdc-icon-button-icon-color: var(--accent-primary) !important;
+    color: var(--accent-primary) !important;
+  }
+  
+  &.mat-warn {
+    --mdc-icon-button-icon-color: var(--error) !important;
+    color: var(--error) !important;
+  }
+  
+  &[disabled] {
+    opacity: 0.4;
+  }
+}
+
+// Focus visible para accesibilidad
+.mat-mdc-button:focus-visible,
+.mat-mdc-raised-button:focus-visible,
+.mat-mdc-outlined-button:focus-visible,
+.mat-mdc-icon-button:focus-visible {
+  outline: 2px solid var(--border-focus) !important;
+  outline-offset: 2px;
+}
+
