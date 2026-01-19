@@ -46,7 +46,6 @@ interface MenuItem {
       background-color: var(--bg-surface);
       display: flex;
       flex-direction: column;
-      border-right: 1px solid var(--border-subtle);
     }
 
     .sidebar-header {

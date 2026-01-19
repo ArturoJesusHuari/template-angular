@@ -1,124 +1,142 @@
-<div class="tables-container">
-  <h1 class="text-3xl font-bold mb-6" style="color: var(--text-primary)">Tablas</h1>
+<div class="min-h-screen text-[#ededed] font-sans">
+  <!-- Header -->
+  <header class="mb-10 max-w-7xl mx-auto">
+    <h1 class="text-3xl font-bold text-white tracking-tight mb-2">Central de Datos</h1>
+    <p class="text-[#a0a0a0] text-sm">Exploración avanzada de registros con capacidades de filtrado dinámico.</p>
+  </header>
 
-  <app-card title="Tabla con Paginación y Ordenamiento" subtitle="Material Table completa">
-    <!-- Filtros -->
-    <div class="filters-container mb-4">
-      <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
-        <mat-form-field appearance="outline" class="w-full">
-          <mat-label>Buscar</mat-label>
-          <input
-            matInput
-            [formControl]="searchControl"
-            placeholder="Buscar por nombre o email..."
-          />
-          <mat-icon matSuffix>search</mat-icon>
-        </mat-form-field>
+  <div class="max-w-7xl mx-auto">
+    <app-card title="Directorio de Operadores" subtitle="Visualización de usuarios y estados del sistema">
+        <!-- Filtros -->
+        <div class="mb-8 p-6 bg-[#0d0d0d] rounded-2xl border border-[#1f1f1f]">
+          <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+            <mat-form-field appearance="outline" class="w-full">
+              <mat-label>Búsqueda Global</mat-label>
+              <input
+                matInput
+                [formControl]="searchControl"
+                placeholder="Nombre, email o ID..."
+              />
+              <mat-icon matSuffix class="opacity-50">search</mat-icon>
+            </mat-form-field>
 
-        <mat-form-field appearance="outline" class="w-full">
-          <mat-label>Filtrar por Rol</mat-label>
-          <mat-select [formControl]="roleControl">
-            <mat-option value="">Todos</mat-option>
-            <mat-option value="Admin">Admin</mat-option>
-            <mat-option value="User">User</mat-option>
-            <mat-option value="Guest">Guest</mat-option>
-          </mat-select>
-        </mat-form-field>
+            <mat-form-field appearance="outline" class="w-full">
+              <mat-label>Filtrar por Rol</mat-label>
+              <mat-select [formControl]="roleControl">
+                <mat-option value="">Todos los Roles</mat-option>
+                <mat-option value="Admin">Administrador</mat-option>
+                <mat-option value="User">Usuario Estándar</mat-option>
+                <mat-option value="Guest">Invitado</mat-option>
+              </mat-select>
+            </mat-form-field>
 
-        <mat-form-field appearance="outline" class="w-full">
-          <mat-label>Filtrar por Estado</mat-label>
-          <mat-select [formControl]="statusControl">
-            <mat-option value="">Todos</mat-option>
-            <mat-option value="Activo">Activo</mat-option>
-            <mat-option value="Inactivo">Inactivo</mat-option>
-          </mat-select>
-        </mat-form-field>
-      </div>
+            <mat-form-field appearance="outline" class="w-full">
+              <mat-label>Estado de Conexión</mat-label>
+              <mat-select [formControl]="statusControl">
+                <mat-option value="">Todos los Estados</mat-option>
+                <mat-option value="Activo">Online</mat-option>
+                <mat-option value="Inactivo">Offline</mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
 
-      <div class="flex justify-end mt-2">
-        <button mat-stroked-button (click)="resetFilters()">
-          <mat-icon>clear</mat-icon>
-          Limpiar Filtros
-        </button>
-      </div>
-    </div>
+          <div class="flex justify-end mt-4">
+            <app-button variant="ghost" size="sm" (click)="resetFilters()" icon="clear">
+              Limpiar Parámetros
+            </app-button>
+          </div>
+        </div>
 
-    <div class="table-wrapper">
-      <table mat-table [dataSource]="dataSource" matSort class="w-full">
-        <ng-container matColumnDef="id">
-          <th mat-header-cell *matHeaderCellDef mat-sort-header>ID</th>
-          <td mat-cell *matCellDef="let user">{{ user.id }}</td>
-        </ng-container>
+        <!-- Table Container -->
+        <div class="overflow-hidden rounded-xl border border-[#1f1f1f] bg-[#0d0d0d]">
+          <table mat-table [dataSource]="dataSource" matSort class="w-full !bg-transparent">
+            <!-- ID Column -->
+            <ng-container matColumnDef="id">
+              <th mat-header-cell *matHeaderCellDef mat-sort-header class="!text-[#707070] !font-bold !text-[10px] !uppercase !tracking-widest !py-4 !px-6 border-b border-[#1f1f1f]">ID</th>
+              <td mat-cell *matCellDef="let user" class="!py-4 !px-6 !text-xs !font-mono !text-[#a0a0a0] border-b border-[#1f1f1f]">
+                #{{ user.id }}
+              </td>
+            </ng-container>
 
-        <ng-container matColumnDef="name">
-          <th mat-header-cell *matHeaderCellDef mat-sort-header>Nombre</th>
-          <td mat-cell *matCellDef="let user">{{ user.name }}</td>
-        </ng-container>
+            <!-- Name Column -->
+            <ng-container matColumnDef="name">
+              <th mat-header-cell *matHeaderCellDef mat-sort-header class="!text-[#707070] !font-bold !text-[10px] !uppercase !tracking-widest !py-4 !px-6 border-b border-[#1f1f1f]">Operador</th>
+              <td mat-cell *matCellDef="let user" class="!py-4 !px-6 border-b border-[#1f1f1f]">
+                <div class="flex flex-col">
+                    <span class="text-sm font-semibold text-white">{{ user.name }}</span>
+                    <span class="text-[11px] text-[#707070]">{{ user.email }}</span>
+                </div>
+              </td>
+            </ng-container>
 
-        <ng-container matColumnDef="email">
-          <th mat-header-cell *matHeaderCellDef mat-sort-header>Email</th>
-          <td mat-cell *matCellDef="let user">{{ user.email }}</td>
-        </ng-container>
+            <!-- Role Column -->
+            <ng-container matColumnDef="role">
+              <th mat-header-cell *matHeaderCellDef mat-sort-header class="!text-[#707070] !font-bold !text-[10px] !uppercase !tracking-widest !py-4 !px-6 border-b border-[#1f1f1f]">Rol Acordado</th>
+              <td mat-cell *matCellDef="let user" class="!py-4 !px-6 border-b border-[#1f1f1f]">
+                @if (user.role === 'Admin') {
+                  <app-badge variant="purple" size="sm">{{ user.role }}</app-badge>
+                } @else if (user.role === 'User') {
+                  <app-badge variant="blue" size="sm">{{ user.role }}</app-badge>
+                } @else {
+                  <app-badge variant="neutral" size="sm">{{ user.role }}</app-badge>
+                }
+              </td>
+            </ng-container>
 
-        <ng-container matColumnDef="role">
-          <th mat-header-cell *matHeaderCellDef mat-sort-header>Rol</th>
-          <td mat-cell *matCellDef="let user">
-            <span
-              class="badge"
-              [ngClass]="{
-                'badge-purple': user.role === 'Admin',
-                'badge-blue': user.role === 'User',
-                'badge-gray': user.role === 'Guest'
-              }"
-            >
-              {{ user.role }}
-            </span>
-          </td>
-        </ng-container>
+            <!-- Status Column -->
+            <ng-container matColumnDef="status">
+              <th mat-header-cell *matHeaderCellDef mat-sort-header class="!text-[#707070] !font-bold !text-[10px] !uppercase !tracking-widest !py-4 !px-6 border-b border-[#1f1f1f]">Salud</th>
+              <td mat-cell *matCellDef="let user" class="!py-4 !px-6 border-b border-[#1f1f1f]">
+                @if (user.status === 'Activo') {
+                  <app-badge variant="success" size="sm" icon="verified">Online</app-badge>
+                } @else {
+                  <app-badge variant="error" size="sm" icon="error">Offline</app-badge>
+                }
+              </td>
+            </ng-container>
 
-        <ng-container matColumnDef="status">
-          <th mat-header-cell *matHeaderCellDef mat-sort-header>Estado</th>
-          <td mat-cell *matCellDef="let user">
-            <span
-              class="badge"
-              [ngClass]="{
-                'badge-green': user.status === 'Activo',
-                'badge-red': user.status === 'Inactivo'
-              }"
-            >
-              {{ user.status }}
-            </span>
-          </td>
-        </ng-container>
+            <!-- Actions Column -->
+            <ng-container matColumnDef="actions">
+              <th mat-header-cell *matHeaderCellDef class="!text-[#707070] !font-bold !text-[10px] !uppercase !tracking-widest !py-4 !px-6 border-b border-[#1f1f1f] text-right">Mantenimiento</th>
+              <td mat-cell *matCellDef="let user" class="!py-4 !px-6 border-b border-[#1f1f1f] text-right">
+                <div class="flex gap-2 justify-end">
+                  <button mat-icon-button class="!text-[#a0a0a0] hover:!text-[#3ecf8e] hover:!bg-[#3ecf8e]/10 transition-colors" matTooltip="Editar">
+                    <mat-icon class="!text-lg">edit</mat-icon>
+                  </button>
+                  <button mat-icon-button class="!text-[#a0a0a0] hover:!text-red-400 hover:!bg-red-400/10 transition-colors" matTooltip="Suspender">
+                    <mat-icon class="!text-lg">block</mat-icon>
+                  </button>
+                </div>
+              </td>
+            </ng-container>
 
-        <ng-container matColumnDef="actions">
-          <th mat-header-cell *matHeaderCellDef>Acciones</th>
-          <td mat-cell *matCellDef="let user">
-            <button mat-icon-button color="primary">
-              <mat-icon>edit</mat-icon>
-            </button>
-            <button mat-icon-button color="warn">
-              <mat-icon>delete</mat-icon>
-            </button>
-          </td>
-        </ng-container>
+            <tr mat-header-row *matHeaderRowDef="['id', 'name', 'role', 'status', 'actions']" class="!bg-[#080808]"></tr>
+            <tr mat-row *matRowDef="let row; columns: ['id', 'name', 'role', 'status', 'actions']" class="hover:bg-[#151515] transition-colors group"></tr>
 
-        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-        <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+            <!-- Empty state -->
+            <tr class="mat-row" *matNoDataRow>
+              <td class="mat-cell !text-center !py-20" colspan="5">
+                <div class="flex flex-col items-center gap-4 text-[#707070]">
+                  <div class="p-4 rounded-full bg-[#111111] border border-[#1f1f1f]">
+                      <mat-icon class="!text-4xl !w-10 !h-10 opacity-50">search_off</mat-icon>
+                  </div>
+                  <div class="text-center">
+                      <p class="text-white font-semibold">Sin coincidencias halladas</p>
+                      <p class="text-xs">Ajuste los parámetros de filtrado para expandir la búsqueda.</p>
+                  </div>
+                </div>
+              </td>
+            </tr>
+          </table>
+        </div>
 
-        <!-- Empty state -->
-        <tr class="mat-row" *matNoDataRow>
-          <td class="mat-cell" [attr.colspan]="displayedColumns.length">
-            <div class="empty-state">
-              <mat-icon>search_off</mat-icon>
-              <p>No se encontraron resultados</p>
-            </div>
-          </td>
-        </tr>
-      </table>
-    </div>
-
-    <mat-paginator [pageSizeOptions]="[5, 10, 20, 50]" showFirstLastButtons class="mt-4">
-    </mat-paginator>
-  </app-card>
+        <mat-paginator 
+          [pageSizeOptions]="[10, 20, 50]" 
+          showFirstLastButtons 
+          class="mt-4 !bg-transparent !text-[#707070]"
+        >
+        </mat-paginator>
+    </app-card>
+  </div>
 </div>
+

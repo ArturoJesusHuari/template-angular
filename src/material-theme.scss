@@ -262,3 +262,82 @@ body {
   outline-offset: 2px;
 }
 
+// ========================================
+// MENÚS Y OVERLAYS (ESTILO SUPABASE)
+// ========================================
+
+// Selector ultra-robusto para el panel del menú (MDC y no-MDC)
+.mat-mdc-menu-panel,
+.mat-menu-panel,
+.mdc-menu-surface.mat-mdc-menu-panel,
+.mat-mdc-menu-panel.mat-mdc-menu-panel {
+  background-color: #1a1a1a !important; // Valor hardcoded para descartar problemas de variables
+  background: #1a1a1a !important;
+  border: 1px solid var(--border-subtle) !important;
+  box-shadow: var(--shadow-lg) !important;
+  border-radius: 12px !important;
+  min-width: 180px !important;
+  overflow: hidden !important;
+
+  // Tokens de Material y MDC
+  --mdc-menu-container-color: #1a1a1a !important;
+  --mat-menu-container-color: #1a1a1a !important;
+  --mat-sys-surface: #1a1a1a !important;
+  --mdc-menu-surface-container-color: #1a1a1a !important;
+}
+
+// Asegurar que el contenido también tenga el fondo
+.mat-mdc-menu-content,
+.mat-menu-content {
+  background-color: #1a1a1a !important;
+  background: #1a1a1a !important;
+}
+
+// Aplicar a cada item del menú
+.mat-mdc-menu-item,
+.mat-menu-item {
+  color: var(--text-primary) !important;
+  height: 44px !important;
+  padding: 0 16px !important;
+  
+  // Iconos
+  .mat-icon, 
+  .mat-mdc-menu-item-icon {
+    margin-right: 12px !important;
+    color: var(--text-secondary) !important;
+    font-size: 20px !important;
+    height: 20px !important;
+    width: 20px !important;
+  }
+
+  // Texto
+  .mdc-list-item__primary-text,
+  .mat-menu-item-text {
+    color: var(--text-primary) !important;
+    font-size: 14px !important;
+    font-weight: 500 !important;
+  }
+  
+  // Hover state
+  &:hover:not([disabled]),
+  &.cdk-program-focused:not([disabled]),
+  &.cdk-visual-focused:not([disabled]),
+  &.cdk-focused:not([disabled]) {
+    background-color: var(--bg-surface-hover) !important;
+    
+    .mat-icon, 
+    .mat-mdc-menu-item-icon,
+    .mdc-list-item__primary-text,
+    .mat-menu-item-text {
+      color: var(--text-primary) !important;
+    }
+  }
+}
+
+// Divisores
+.mat-mdc-menu-panel .mat-divider,
+.mat-menu-panel .mat-divider {
+  border-top-color: var(--border-subtle) !important;
+  margin: 4px 0 !important;
+}
+

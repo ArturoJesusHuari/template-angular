@@ -1,0 +1,225 @@
+<div class="min-h-screen text-[#ededed] font-sans">
+
+  <!-- Header -->
+  <header class="flex flex-col md:flex-row justify-between items-start md:items-center mb-10 gap-4">
+    <div>
+      <h1 class="text-3xl font-bold tracking-tight text-white mb-1">Dashboard</h1>
+      <p class="text-[#a0a0a0] text-sm">Resumen general de la plataforma y métricas clave.</p>
+    </div>
+
+    <div class="flex items-center gap-3">
+      <app-button variant="outline" (click)="refreshStats()" icon="refresh">
+        Refrescar
+      </app-button>
+
+      <app-button variant="primary">
+        Exportar Reporte
+      </app-button>
+    </div>
+  </header>
+
+  @if (loading$ | async) {
+    <div class="flex flex-col justify-center items-center h-[60vh]">
+      <div class="w-8 h-8 border-2 border-[#3ecf8e]/30 border-t-[#3ecf8e] rounded-full animate-spin"></div>
+      <p class="mt-4 text-sm text-[#a0a0a0] animate-pulse">Cargando datos...</p>
+    </div>
+  }
+
+  @else if (error$ | async; as error) {
+    <div class="border border-red-900/30 bg-red-900/10 rounded-xl p-8 max-w-lg mx-auto text-center mt-20">
+      <mat-icon class="text-red-500 mb-4 scale-150">error_outline</mat-icon>
+      <h2 class="text-xl font-bold text-white mb-2">Error de Conexión</h2>
+      <p class="text-sm text-[#a0a0a0] mb-6">{{ error }}</p>
+      <app-button variant="danger" (click)="refreshStats()">
+        Reintentar
+      </app-button>
+    </div>
+  }
+
+  @else if (stats$ | async; as stats) {
+
+  <!-- KPIs -->
+  <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-10">
+
+    <div class="bg-[#111111] border border-[#1f1f1f] rounded-xl p-6 hover:border-[#3ecf8e]/30 transition-all duration-300 group">
+      <div class="flex justify-between mb-4">
+        <span class="text-xs font-semibold text-[#707070] uppercase tracking-wider">Usuarios Totales</span>
+        <mat-icon class="text-[#3ecf8e] opacity-70 group-hover:opacity-100 transition-opacity">people</mat-icon>
+      </div>
+      <div class="flex items-baseline gap-2">
+        <span class="text-3xl font-bold text-white tracking-tight">{{ stats.totalUsers | number }}</span>
+        <span class="text-xs text-[#3ecf8e] bg-[#3ecf8e]/10 px-1.5 py-0.5 rounded font-medium">+12%</span>
+      </div>
+      <p class="text-xs text-[#707070] mt-3">vs periodo anterior</p>
+    </div>
+
+    <div class="bg-[#111111] border border-[#1f1f1f] rounded-xl p-6 hover:border-[#3ecf8e]/30 transition-all duration-300 group">
+      <div class="flex justify-between mb-4">
+        <span class="text-xs font-semibold text-[#707070] uppercase tracking-wider">Ventas Totales</span>
+        <mat-icon class="text-[#3ecf8e] opacity-70 group-hover:opacity-100 transition-opacity">shopping_cart</mat-icon>
+      </div>
+      <div class="flex items-baseline gap-2">
+        <span class="text-3xl font-bold text-white tracking-tight">{{ stats.totalSales | number }}</span>
+        <span class="text-xs text-[#3ecf8e] bg-[#3ecf8e]/10 px-1.5 py-0.5 rounded font-medium">+5.4%</span>
+      </div>
+      <p class="text-xs text-[#707070] mt-3">24 ventas hoy</p>
+    </div>
+
+    <div class="bg-[#111111] border border-[#1f1f1f] rounded-xl p-6 hover:border-[#3ecf8e]/30 transition-all duration-300 group">
+      <div class="flex justify-between mb-4">
+        <span class="text-xs font-semibold text-[#707070] uppercase tracking-wider">Proyectos Activos</span>
+        <mat-icon class="text-blue-400 opacity-70 group-hover:opacity-100 transition-opacity">work</mat-icon>
+      </div>
+      <div class="flex items-baseline gap-2">
+        <span class="text-3xl font-bold text-white tracking-tight">{{ stats.activeProjects }}</span>
+        <span class="text-xs text-blue-400 bg-blue-400/10 px-1.5 py-0.5 rounded font-medium">Estable</span>
+      </div>
+      <p class="text-xs text-[#707070] mt-3">Todos al día</p>
+    </div>
+
+    <div class="bg-[#111111] border border-[#1f1f1f] rounded-xl p-6 hover:border-[#3ecf8e]/30 transition-all duration-300 group">
+      <div class="flex justify-between mb-4">
+        <span class="text-xs font-semibold text-[#707070] uppercase tracking-wider">Ingresos Anuales</span>
+        <mat-icon class="text-[#3ecf8e] opacity-70 group-hover:opacity-100 transition-opacity">attach_money</mat-icon>
+      </div>
+      <div class="flex items-baseline gap-2">
+        <span class="text-3xl font-bold text-white tracking-tight">{{ stats.revenue | currency }}</span>
+        <span class="text-xs text-[#3ecf8e] bg-[#3ecf8e]/10 px-1.5 py-0.5 rounded font-medium">+18.2%</span>
+      </div>
+      <p class="text-xs text-[#707070] mt-3">Crecimiento sostenido</p>
+    </div>
+
+  </div>
+
+  <!-- Layout -->
+  <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+
+    <!-- Main Content -->
+    <div class="lg:col-span-2 flex flex-col gap-8">
+      <app-card title="Acciones Rápidas" subtitle="Gestión del sistema">
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+          <button class="flex flex-col items-start p-4 rounded-xl border border-[#1f1f1f] bg-[#0d0d0d] hover:border-[#3ecf8e]/30 hover:bg-[#151515] transition-all group text-left">
+            <div class="p-2 rounded-lg bg-[#3ecf8e]/10 mb-3 group-hover:bg-[#3ecf8e]/20 transition-colors">
+              <mat-icon class="text-[#3ecf8e]">add</mat-icon>
+            </div>
+            <p class="text-sm font-semibold text-white mb-1">Nuevo Proyecto</p>
+            <p class="text-xs text-[#707070]">Crear espacio de trabajo</p>
+          </button>
+
+          <button class="flex flex-col items-start p-4 rounded-xl border border-[#1f1f1f] bg-[#0d0d0d] hover:border-blue-400/30 hover:bg-[#151515] transition-all group text-left">
+            <div class="p-2 rounded-lg bg-blue-400/10 mb-3 group-hover:bg-blue-400/20 transition-colors">
+              <mat-icon class="text-blue-400">person_add</mat-icon>
+            </div>
+            <p class="text-sm font-semibold text-white mb-1">Invitar Usuario</p>
+            <p class="text-xs text-[#707070]">Añadir nuevos colaboradores</p>
+          </button>
+
+          <button class="flex flex-col items-start p-4 rounded-xl border border-[#1f1f1f] bg-[#0d0d0d] hover:border-purple-400/30 hover:bg-[#151515] transition-all group text-left">
+            <div class="p-2 rounded-lg bg-purple-400/10 mb-3 group-hover:bg-purple-400/20 transition-colors">
+              <mat-icon class="text-purple-400">assessment</mat-icon>
+            </div>
+            <p class="text-sm font-semibold text-white mb-1">Ver Auditoría</p>
+            <p class="text-xs text-[#707070]">Registro de actividad total</p>
+          </button>
+        </div>
+
+        <!-- Tabla de Actividad -->
+        <div class="mt-8">
+            <h3 class="text-sm font-semibold text-white mb-4 flex items-center gap-2">
+                <span class="w-1.5 h-1.5 rounded-full bg-[#3ecf8e]"></span>
+                Actividad Reciente
+            </h3>
+          <div class="overflow-x-auto">
+            <table class="w-full text-left text-sm">
+              <thead class="text-xs text-[#707070] border-b border-[#1f1f1f] uppercase tracking-wider">
+                <tr>
+                  <th class="pb-3 font-semibold">Evento</th>
+                  <th class="pb-3 font-semibold">Estado</th>
+                  <th class="pb-3 text-right font-semibold">Fecha</th>
+                </tr>
+              </thead>
+              <tbody class="divide-y divide-[#1f1f1f]">
+                <tr class="hover:bg-[#151515] transition-colors group">
+                  <td class="py-4 text-white">Sincronización DB</td>
+                  <td class="py-4">
+                    <app-badge variant="success" size="sm" icon="check_circle">
+                      Completado
+                    </app-badge>
+                  </td>
+                  <td class="py-4 text-right text-[#707070] text-xs">Hace 2 min</td>
+                </tr>
+                <tr class="hover:bg-[#151515] transition-colors group">
+                  <td class="py-4 text-white">Deploy producción</td>
+                  <td class="py-4">
+                    <app-badge variant="blue" size="sm" icon="refresh">
+                      En progreso
+                    </app-badge>
+                  </td>
+                  <td class="py-4 text-right text-[#707070] text-xs">Hace 15 min</td>
+                </tr>
+                <tr class="hover:bg-[#151515] transition-colors group">
+                  <td class="py-4 text-white">Backup semanal</td>
+                  <td class="py-4">
+                    <app-badge variant="success" size="sm" icon="check_circle">
+                      Completado
+                    </app-badge>
+                  </td>
+                  <td class="py-4 text-right text-[#707070] text-xs">Hace 1 hora</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </app-card>
+    </div>
+
+    <!-- Right Sidebar -->
+    <aside class="flex flex-col gap-8">
+      <app-card title="Estado del Sistema" subtitle="Salud de servicios centrales">
+        <div class="space-y-5">
+          <div class="flex justify-between items-center group">
+            <span class="text-sm text-[#a0a0a0]">API Gateway</span>
+            <div class="flex items-center gap-2">
+                <span class="text-[10px] font-bold text-[#3ecf8e] uppercase">Online</span>
+                <span class="w-2 h-2 rounded-full bg-[#3ecf8e] shadow-[0_0_8px_rgba(62,207,142,0.5)]"></span>
+            </div>
+          </div>
+          <div class="flex justify-between items-center">
+            <span class="text-sm text-[#a0a0a0]">Base de Datos</span>
+            <div class="flex items-center gap-2">
+                <span class="text-[10px] font-bold text-[#3ecf8e] uppercase">Sana</span>
+                <span class="w-2 h-2 rounded-full bg-[#3ecf8e] shadow-[0_0_8px_rgba(62,207,142,0.5)]"></span>
+            </div>
+          </div>
+          <div class="flex justify-between items-center">
+            <span class="text-sm text-[#a0a0a0]">Borde (Edge)</span>
+            <span class="text-xs font-mono text-[#3ecf8e]">0ms latencia</span>
+          </div>
+
+          <div class="pt-4 border-t border-[#1f1f1f]">
+            <div class="flex justify-between items-center mb-2">
+                <span class="text-xs text-[#707070] font-semibold uppercase">Uso de Disco</span>
+                <span class="text-xs font-bold text-white">65%</span>
+            </div>
+            <div class="h-1.5 bg-[#1f1f1f] rounded-full overflow-hidden">
+              <div class="h-full bg-[#3ecf8e] rounded-full" style="width:65%"></div>
+            </div>
+            <p class="text-[10px] text-[#707070] mt-2">1.2TB de 2TB utilizados en producción</p>
+          </div>
+        </div>
+      </app-card>
+
+      <div class="bg-gradient-to-br from-[#3ecf8e]/10 to-transparent border border-[#3ecf8e]/20 rounded-xl p-6 relative overflow-hidden group">
+        <div class="absolute -right-4 -top-4 w-24 h-24 bg-[#3ecf8e]/10 rounded-full blur-2xl group-hover:bg-[#3ecf8e]/20 transition-all"></div>
+        <h4 class="text-sm font-bold text-[#3ecf8e] mb-2">Soporte Técnico</h4>
+        <p class="text-xs text-[#a0a0a0] leading-relaxed mb-6">Accede a nuestra documentación técnica avanzada o contacta con ingeniería.</p>
+        <app-button variant="primary" [fullWidth]="true" size="sm">
+          Ir a Documentación
+        </app-button>
+      </div>
+    </aside>
+
+  </div>
+  }
+</div>
+

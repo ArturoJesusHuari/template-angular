@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
-import { CardComponent } from '../../../shared/components/card/card.component';
+import { CardComponent, ButtonComponent } from '../../../shared/components';
 import { HighlightDirective } from '../../../shared/directives/highlight.directive';
 import { TruncatePipe } from '../../../shared/pipes/truncate.pipe';
 
@@ -14,6 +14,7 @@ import { TruncatePipe } from '../../../shared/pipes/truncate.pipe';
     MatButtonModule,
     MatIconModule,
     CardComponent,
+    ButtonComponent,
     HighlightDirective,
     TruncatePipe,
   ],

@@ -1,182 +1,207 @@
-<div class="forms-container">
-  <header class="page-header">
-    <h1 class="page-title">Configuración de Perfil</h1>
-    <p class="page-subtitle">Gestione la información técnica y financiera del usuario.</p>
+<div class="min-h-screen text-[#ededed] font-sans">
+  <!-- Header -->
+  <header class="mb-10 max-w-7xl mx-auto">
+    <h1 class="text-3xl font-bold text-white tracking-tight mb-2">Configuración Entidad</h1>
+    <p class="text-[#a0a0a0] text-sm">Gestión centralizada de perfiles y normalización de parámetros del sistema.</p>
   </header>
 
-  <!-- FORMULARIO PRINCIPAL -->
-  <app-card
-    title="Editor de Entidad"
-    subtitle="Complete los campos requeridos para la normalización de datos."
-  >
-    <form [formGroup]="mainForm" (ngSubmit)="onSubmit()" class="form-grid">
-      <!-- SECCIÓN: DATOS PERSONALES -->
-      <div class="form-section">
-        <div class="section-header">
-          <h3 class="section-title"><mat-icon>person</mat-icon> Identidad</h3>
-        </div>
+  <div class="max-w-7xl mx-auto">
+    <!-- FORMULARIO PRINCIPAL -->
+    <app-card
+      title="Editor Maestro"
+      subtitle="Complete los protocolos de validación para la persistencia de datos."
+    >
+      <form [formGroup]="mainForm" (ngSubmit)="onSubmit()" class="space-y-12">
+        <!-- SECCIÓN: IDENTIDAD -->
+        <div class="bg-[#0d0d0d] p-6 rounded-2xl border border-[#1f1f1f] space-y-8">
+          <div class="flex items-center gap-3">
+            <div class="p-2 rounded-lg bg-[#3ecf8e]/10">
+                <mat-icon class="text-[#3ecf8e]">person</mat-icon>
+            </div>
+            <div>
+                <h3 class="text-base font-bold text-white">Protocolo de Identidad</h3>
+                <p class="text-[10px] text-[#707070] uppercase tracking-wider">Información básica del operador</p>
+            </div>
+          </div>
 
-        <mat-form-field appearance="outline" class="w-full">
-          <mat-label>Nombre Completo</mat-label>
-          <input matInput formControlName="fullName" placeholder="Ej: Juan Pérez" />
-          @if (mainForm.get('fullName')?.hasError('required') && mainForm.get('fullName')?.touched)
-          {
-          <mat-error>El nombre es requerido</mat-error>
-          }
-        </mat-form-field>
-
-        <mat-form-field appearance="outline" class="w-full">
-          <mat-label>Email Corporativo</mat-label>
-          <input matInput formControlName="email" type="email" placeholder="ejemplo@empresa.com" />
-          @if (mainForm.get('email')?.hasError('required') && mainForm.get('email')?.touched) {
-          <mat-error>El email es requerido</mat-error>
-          }
-        </mat-form-field>
-
-        <mat-form-field appearance="outline" class="w-full">
-          <mat-label>Teléfono de Contacto</mat-label>
-          <input
-            matInput
-            formControlName="phone"
-            appPhoneInput
-            [phoneLength]="9"
-            placeholder="987654321"
-          />
-          <mat-hint>9 dígitos sin espacios</mat-hint>
-        </mat-form-field>
-
-        <mat-form-field appearance="outline" class="w-full">
-          <mat-label>País</mat-label>
-          <mat-select formControlName="country">
-            @for (country of countries; track country.code) {
-            <mat-option [value]="country.code">{{ country.name }}</mat-option>
-            }
-          </mat-select>
-        </mat-form-field>
-      </div>
-
-      <!-- SECCIÓN: DATOS FINANCIEROS -->
-      <div class="form-section">
-        <div class="section-header">
-          <h3 class="section-title"><mat-icon>payments</mat-icon> Finanzas</h3>
-        </div>
-
-        <mat-form-field appearance="outline" class="w-full">
-          <mat-label>Salario Base (USD)</mat-label>
-          <input matInput formControlName="salary" appMoneyInput placeholder="0.00" />
-          <mat-icon matPrefix style="margin-right: 8px; opacity: 0.5">attach_money</mat-icon>
-        </mat-form-field>
-
-        <mat-form-field appearance="outline" class="w-full">
-          <mat-label>Precio de Venta</mat-label>
-          <input matInput formControlName="productPrice" appMoneyInput placeholder="0.00" />
-          <mat-icon matPrefix style="margin-right: 8px; opacity: 0.5">local_offer</mat-icon>
-        </mat-form-field>
-
-        <mat-form-field appearance="outline" class="w-full">
-          <mat-label>Edad</mat-label>
-          <input matInput formControlName="age" appIntegerInput placeholder="25" />
-        </mat-form-field>
-
-        <mat-form-field appearance="outline" class="w-full">
-          <mat-label>Peso (KG)</mat-label>
-          <input matInput formControlName="weight" appNumericInput placeholder="75.5" />
-        </mat-form-field>
-      </div>
-
-      <!-- SECCIÓN: CATEGORÍAS Y TÉRMINOS -->
-      <div class="form-section form-section-full">
-        <div class="section-header">
-          <h3 class="section-title"><mat-icon>rule</mat-icon> Clasificación y Cumplimiento</h3>
-        </div>
-
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-          <mat-form-field appearance="outline" class="w-full">
-            <mat-label>Categorías Asignadas</mat-label>
-            <mat-select formControlName="categories" multiple>
-              @for (category of categories; track category.id) {
-              <mat-option [value]="category.id">{{ category.name }}</mat-option>
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-6">
+            <mat-form-field appearance="outline" class="w-full">
+              <mat-label>Nombre Completo</mat-label>
+              <input matInput formControlName="fullName" placeholder="Ej: Juan Pérez" />
+              @if (mainForm.get('fullName')?.hasError('required') && mainForm.get('fullName')?.touched)
+              {
+              <mat-error>El nombre es requerido</mat-error>
               }
-            </mat-select>
-          </mat-form-field>
+            </mat-form-field>
 
-          <div class="flex flex-col gap-4">
-            <mat-checkbox formControlName="acceptTerms">
-              Acepto los términos de servicio
-            </mat-checkbox>
-            <mat-checkbox formControlName="newsletter">
-              Suscribirse al boletín técnico
-            </mat-checkbox>
+            <mat-form-field appearance="outline" class="w-full">
+              <mat-label>Email Corporativo</mat-label>
+              <input matInput formControlName="email" type="email" placeholder="ejemplo@empresa.com" />
+              @if (mainForm.get('email')?.hasError('required') && mainForm.get('email')?.touched) {
+              <mat-error>El email es requerido</mat-error>
+              }
+            </mat-form-field>
+
+            <mat-form-field appearance="outline" class="w-full">
+              <mat-label>Teléfono de Contacto</mat-label>
+              <input
+                matInput
+                formControlName="phone"
+                appPhoneInput
+                [phoneLength]="9"
+                placeholder="987654321"
+              />
+              <mat-hint class="!text-[#707070]">9 dígitos sin espacios</mat-hint>
+            </mat-form-field>
+
+            <mat-form-field appearance="outline" class="w-full">
+              <mat-label>País de Origen</mat-label>
+              <mat-select formControlName="country">
+                @for (country of countries; track country.code) {
+                <mat-option [value]="country.code">{{ country.name }}</mat-option>
+                }
+              </mat-select>
+            </mat-form-field>
+          </div>
+        </div>
+
+        <!-- SECCIÓN: FINANZAS -->
+        <div class="bg-[#0d0d0d] p-6 rounded-2xl border border-[#1f1f1f] space-y-8">
+            <div class="flex items-center gap-3">
+              <div class="p-2 rounded-lg bg-blue-400/10">
+                  <mat-icon class="text-blue-400">payments</mat-icon>
+              </div>
+              <div>
+                  <h3 class="text-base font-bold text-white">Métricas Financieras</h3>
+                  <p class="text-[10px] text-[#707070] uppercase tracking-wider">Parámetros de compensación y costes</p>
+              </div>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-6">
+              <mat-form-field appearance="outline" class="w-full">
+                <mat-label>Salario Base (USD)</mat-label>
+                <input matInput formControlName="salary" appMoneyInput placeholder="0.00" />
+                <mat-icon matPrefix class="mr-2 opacity-50">attach_money</mat-icon>
+              </mat-form-field>
+
+              <mat-form-field appearance="outline" class="w-full">
+                <mat-label>Precio Unitario</mat-label>
+                <input matInput formControlName="productPrice" appMoneyInput placeholder="0.00" />
+                <mat-icon matPrefix class="mr-2 opacity-50">local_offer</mat-icon>
+              </mat-form-field>
+
+              <mat-form-field appearance="outline" class="w-full">
+                <mat-label>Edad Cronológica</mat-label>
+                <input matInput formControlName="age" appIntegerInput placeholder="25" />
+              </mat-form-field>
+
+              <mat-form-field appearance="outline" class="w-full">
+                <mat-label>Masa (KG)</mat-label>
+                <input matInput formControlName="weight" appNumericInput placeholder="75.5" />
+              </mat-form-field>
+            </div>
+        </div>
+
+        <!-- SECCIÓN: CUMPLIMIENTO -->
+        <div class="bg-[#0d0d0d] p-6 rounded-2xl border border-[#1f1f1f] space-y-8">
+            <div class="flex items-center gap-3">
+              <div class="p-2 rounded-lg bg-purple-400/10">
+                  <mat-icon class="text-purple-400">rule</mat-icon>
+              </div>
+              <div>
+                  <h3 class="text-base font-bold text-white">Cumplimiento & Tags</h3>
+                  <p class="text-[10px] text-[#707070] uppercase tracking-wider">Clasificación y términos legales</p>
+              </div>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-6">
+              <mat-form-field appearance="outline" class="w-full">
+                <mat-label>Categorías Asignadas</mat-label>
+                <mat-select formControlName="categories" multiple>
+                  @for (category of categories; track category.id) {
+                  <mat-option [value]="category.id">{{ category.name }}</mat-option>
+                  }
+                </mat-select>
+              </mat-form-field>
+
+              <div class="flex flex-col gap-3 justify-center">
+                <mat-checkbox formControlName="acceptTerms" class="!text-white">
+                  <span class="text-sm">Acepto los términos de servicio Nexus</span>
+                </mat-checkbox>
+                <mat-checkbox formControlName="newsletter" class="!text-white">
+                  <span class="text-sm">Suscribirse al boletín técnico semanal</span>
+                </mat-checkbox>
+              </div>
+            </div>
+        </div>
+
+        <!-- BOTONES DE ACCIÓN -->
+        <div class="flex flex-col sm:flex-row gap-4 pt-4">
+          <app-button
+            variant="outline"
+            type="button"
+            (click)="resetForm()"
+            [disabled]="isSubmitting"
+            class="flex-1 sm:flex-none"
+          >
+            Descartar Cambios
+          </app-button>
+          
+          <app-button
+            variant="primary"
+            type="submit"
+            [disabled]="!mainForm.valid || isSubmitting"
+            [loading]="isSubmitting"
+            size="lg"
+            class="flex-1"
+          >
+            <mat-icon class="mr-2">save</mat-icon>
+            Finalizar y Guardar
+          </app-button>
+        </div>
+      </form>
+
+      <!-- RESUMEN DE DATOS -->
+      @if (submittedData) {
+      <div class="mt-12 p-8 bg-gradient-to-br from-[#111111] to-[#0d0d0d] border border-[#1f1f1f] rounded-2xl relative overflow-hidden">
+        <div class="absolute top-0 right-0 p-4">
+            <mat-icon class="text-[#3ecf8e] opacity-20 scale-[4]">check_circle</mat-icon>
+        </div>
+
+        <div class="flex items-center gap-2 mb-8 text-[#3ecf8e]">
+          <mat-icon>verified</mat-icon>
+          <h3 class="font-bold text-lg tracking-tight">Sincronización Exitosa</h3>
+        </div>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+          <div class="flex flex-col gap-1">
+            <span class="text-[10px] text-[#707070] uppercase font-bold tracking-widest">Operador</span>
+            <span class="text-sm text-white font-medium">{{ submittedData.fullName }}</span>
+          </div>
+          <div class="flex flex-col gap-1">
+            <span class="text-[10px] text-[#707070] uppercase font-bold tracking-widest">Canal de Enlace</span>
+            <span class="text-sm text-white font-medium">{{ submittedData.email }}</span>
+          </div>
+          <div class="flex flex-col gap-1">
+            <span class="text-[10px] text-[#707070] uppercase font-bold tracking-widest">Compensación</span>
+            <span class="text-sm text-[#3ecf8e] font-mono font-bold">{{ submittedData.salary | currency }}</span>
+          </div>
+          <div class="flex flex-col gap-1">
+            <span class="text-[10px] text-[#707070] uppercase font-bold tracking-widest">Valor de Activo</span>
+            <span class="text-sm text-white font-mono">{{ submittedData.productPrice | currency }}</span>
+          </div>
+          <div class="flex flex-col gap-1 lg:col-span-2">
+            <span class="text-[10px] text-[#707070] uppercase font-bold tracking-widest">Clusters Asignados</span>
+            <div class="flex flex-wrap gap-2 mt-1">
+                @for (cat of getCategoryNames(submittedData.categories).split(','); track cat) {
+                    <app-badge variant="neutral" size="sm">{{ cat.trim() }}</app-badge>
+                }
+            </div>
           </div>
         </div>
       </div>
-
-      <!-- BOTONES DE ACCIÓN -->
-      <div class="form-actions">
-        <button
-          mat-stroked-button
-          type="button"
-          (click)="resetForm()"
-          [disabled]="isSubmitting"
-          class="reset-button"
-        >
-          Descartar Cambios
-        </button>
-        <button
-          mat-flat-button
-          color="primary"
-          type="submit"
-          [disabled]="!mainForm.valid || isSubmitting"
-          class="submit-button"
-        >
-          @if (isSubmitting) {
-          <mat-spinner diameter="20" style="margin-right: 8px; display: inline-block"></mat-spinner>
-          <span>Procesando...</span>
-          } @else {
-          <div class="flex items-center gap-2">
-            <mat-icon>save</mat-icon>
-            <span>Guardar Cambios</span>
-          </div>
-          }
-        </button>
-      </div>
-    </form>
-
-    <!-- RESUMEN DE DATOS (MODO LECTURA) -->
-    @if (submittedData) {
-    <div class="submitted-data-card p-6 mt-8 bg-surface border-subtle rounded-lg">
-      <div class="flex items-center gap-2 mb-4 text-green-500">
-        <mat-icon>check_circle</mat-icon>
-        <h3 class="font-bold">Datos Normalizados Correctamente</h3>
-      </div>
-
-      <div class="data-grid">
-        <div class="data-item">
-          <span class="data-label">Identidad</span>
-          <span class="data-value">{{ submittedData.fullName }}</span>
-        </div>
-        <div class="data-item">
-          <span class="data-label">Email</span>
-          <span class="data-value">{{ submittedData.email }}</span>
-        </div>
-        <div class="data-item">
-          <span class="data-label">Contacto</span>
-          <span class="data-value">+51 {{ submittedData.phone }}</span>
-        </div>
-        <div class="data-item">
-          <span class="data-label">Compensación</span>
-          <span class="data-value">{{ submittedData.salary | currency }}</span>
-        </div>
-        <div class="data-item">
-          <span class="data-label">Precio</span>
-          <span class="data-value">{{ submittedData.productPrice | currency }}</span>
-        </div>
-        <div class="data-item">
-          <span class="data-label">Clasificación</span>
-          <span class="data-value">{{ getCategoryNames(submittedData.categories) }}</span>
-        </div>
-      </div>
-    </div>
-    }
-  </app-card>
+      }
+    </app-card>
+  </div>
 </div>
+

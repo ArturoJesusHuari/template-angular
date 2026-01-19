@@ -67,10 +67,6 @@ import { MatDividerModule } from '@angular/material/divider';
       gap: 0.5rem;
       align-items: center;
     }
-
-    ::ng-deep .mat-mdc-menu-panel {
-      margin-top: 8px;
-    }
   `],
 })
 export class HeaderComponent {}

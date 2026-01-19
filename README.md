@@ -88,6 +88,11 @@ npm test
 
 ### ✅ Features
 
+### Login
+- Formulario de login
+- Validaciones
+- Manejo de errores
+
 #### Dashboard
 - Cards con estadísticas
 - Integración completa con NgRx
@@ -95,7 +100,8 @@ npm test
 - Datos simulados con delay
 
 #### Componentes Material
-- Botones (todas las variantes)
+- Botones 
+- Sidebar
 - Dialogs
 - Snackbars
 - Menús
@@ -115,12 +121,6 @@ npm test
 - Filtrado
 - Acciones por fila
 
-#### UI Demo
-- Componentes compartidos
-- Directivas personalizadas (Highlight)
-- Pipes personalizados (Truncate)
-- Gradientes y animaciones
-- Cards interactivas
 
 ### ✅ NgRx Store
 
@@ -145,11 +145,8 @@ Implementación completa de NgRx en el feature Dashboard:
 - Configurado para trabajar con Angular Material
 - Utilidades para spacing, layout y colores
 - No reemplaza componentes Material
+- No usar css en lo posible, puro tailwind
 
-### Angular Material
-- Theme: Azure Blue
-- Componentes completos
-- Personalización mediante CSS
 
 ## 🔧 Configuración
 
@@ -204,11 +201,3 @@ Para extender este template:
 ## 🤝 Contribución
 
 Este es un template base. Personalízalo según las necesidades de tu proyecto.
-
-## 📄 Licencia
-
-MIT
-
----
-
-**Desarrollado con ❤️ usando Angular**

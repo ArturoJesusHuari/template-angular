@@ -6,8 +6,8 @@ import { MatDialog, MatDialogModule } from '@angular/material/dialog';
 import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatTooltipModule } from '@angular/material/tooltip';
-import { CardComponent } from '../../../shared/components/card/card.component';
-import { DialogComponent } from '../../../shared/components/dialog/dialog.component';
+import { MatDividerModule } from '@angular/material/divider';
+import { CardComponent, DialogComponent, ButtonComponent, BadgeComponent } from '../../../shared/components';
 
 @Component({
   selector: 'app-components-demo',
@@ -20,7 +20,10 @@ import { DialogComponent } from '../../../shared/components/dialog/dialog.compon
     MatSnackBarModule,
     MatMenuModule,
     MatTooltipModule,
+    MatDividerModule,
     CardComponent,
+    ButtonComponent,
+    BadgeComponent,
   ],
   templateUrl: './components-demo.page.html',
 })

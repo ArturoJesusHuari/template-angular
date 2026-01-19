@@ -1,83 +1,162 @@
-<div class="components-container">
-  <h1 class="text-3xl font-bold text-gray-800 mb-6">Componentes Material</h1>
+<div class="min-h-screen text-[#ededed] font-sans">
+  <!-- Header -->
+  <header class="mb-10 max-w-7xl mx-auto">
+    <h1 class="text-3xl font-bold text-white tracking-tight mb-2">Componentes de Sistema</h1>
+    <p class="text-[#a0a0a0] text-sm">Biblioteca de componentes atómicos y patrones de diseño reutilizables.</p>
+  </header>
 
-  <app-card title="Botones" subtitle="Diferentes variantes de botones">
-    <div class="flex flex-wrap gap-4">
-      <button mat-raised-button>Basic</button>
-      <button mat-raised-button color="primary">Primary</button>
-      <button mat-raised-button color="accent">Accent</button>
-      <button mat-raised-button color="warn">Warn</button>
-      <button mat-raised-button disabled>Disabled</button>
+  <div class="max-w-7xl mx-auto flex flex-col gap-8">
+    <!-- Custom Buttons Section -->
+    <app-card title="Botones (VDS)" subtitle="Variantes del sistema de diseño Nexus" class="mb-6">
+      <div class="space-y-8">
+        <!-- Primary & Secondary -->
+        <div>
+          <h3 class="text-xs font-bold text-[#707070] uppercase tracking-widest mb-4">Base & Accionables</h3>
+          <div class="flex flex-wrap gap-4">
+            <app-button variant="primary" size="sm">Pequeño</app-button>
+            <app-button variant="primary">Botón Estándar</app-button>
+            <app-button variant="primary" size="lg" icon="add">Acción Principal</app-button>
+            <app-button variant="secondary">Secundario</app-button>
+            <app-button variant="secondary" icon="refresh" iconPosition="right">Recargar</app-button>
+          </div>
+        </div>
+
+        <!-- Outline & Ghost -->
+        <div>
+          <h3 class="text-xs font-bold text-[#707070] uppercase tracking-widest mb-4">Bordes & Sutiles</h3>
+          <div class="flex flex-wrap gap-4">
+            <app-button variant="outline">Contorno</app-button>
+            <app-button variant="outline" icon="settings">Configuración</app-button>
+            <app-button variant="ghost">Fantasma</app-button>
+            <app-button variant="ghost" icon="more_vert"></app-button>
+          </div>
+        </div>
+
+        <!-- States -->
+        <div>
+          <h3 class="text-xs font-bold text-[#707070] uppercase tracking-widest mb-4">Estados Dinámicos</h3>
+          <div class="flex flex-wrap gap-4">
+            <app-button variant="primary" [disabled]="true">Deshabilitado</app-button>
+            <app-button variant="primary" [loading]="true">Procesando</app-button>
+            <app-button variant="danger" icon="delete">Zona de Peligro</app-button>
+            <div class="w-full max-w-md pt-2">
+                <app-button variant="primary" [fullWidth]="true">Botón de Ancho Completo</app-button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </app-card>
+
+    <!-- Badges Section -->
+    <app-card title="Etiquetas (Badges)" subtitle="Indicadores visuales de estado y categorización" class="mb-6">
+      <div class="space-y-8">
+        <!-- Status Badges -->
+        <div>
+          <h3 class="text-xs font-bold text-[#707070] uppercase tracking-widest mb-4">Semántica de Estado</h3>
+          <div class="flex flex-wrap gap-4">
+            <app-badge variant="success" icon="check_circle">Operativo</app-badge>
+            <app-badge variant="error" icon="error">Crítico</app-badge>
+            <app-badge variant="warning" icon="warning">Advertencia</app-badge>
+            <app-badge variant="info" icon="info">Informativo</app-badge>
+            <app-badge variant="neutral">Neutral</app-badge>
+          </div>
+        </div>
+
+        <!-- Specialized -->
+        <div>
+          <h3 class="text-xs font-bold text-[#707070] uppercase tracking-widest mb-4">Colores de Categoría</h3>
+          <div class="flex flex-wrap gap-4">
+            <app-badge variant="purple">Admin</app-badge>
+            <app-badge variant="blue">Developer</app-badge>
+            <app-badge variant="gray">Guest</app-badge>
+          </div>
+        </div>
+
+        <!-- Sizes -->
+        <div>
+          <h3 class="text-xs font-bold text-[#707070] uppercase tracking-widest mb-4">Escala Visual</h3>
+          <div class="flex flex-wrap items-center gap-6">
+            <app-badge variant="purple" size="sm">Small Tag</app-badge>
+            <app-badge variant="blue" size="md">Medium Tag</app-badge>
+            <app-badge variant="success" size="lg">Large Tag</app-badge>
+          </div>
+        </div>
+      </div>
+    </app-card>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+        <!-- Interactive Elements -->
+        <div class="flex flex-col gap-8">
+            <app-card title="Diálogos & Feedback" subtitle="Modales y notificaciones">
+                <div class="flex flex-col gap-4">
+                    <app-button variant="primary" (click)="openDialog()" icon="open_in_new" [fullWidth]="true">
+                        Lanzar Diálogo
+                    </app-button>
+                    
+                    <div class="flex gap-2">
+                        <app-button variant="secondary" (click)="showSnackbar('Operación exitosa', 'success')" class="flex-1">
+                            Success Toast
+                        </app-button>
+                        <app-button variant="danger" (click)="showSnackbar('Fallo en el servidor', 'error')" class="flex-1">
+                            Error Toast
+                        </app-button>
+                    </div>
+                </div>
+            </app-card>
+
+            <app-card title="Menú Contextual" subtitle="Opciones desplegables">
+                <button mat-stroked-button [matMenuTriggerFor]="menu" class="!w-full !py-6 !rounded-xl !border-[#1f1f1f] !bg-[#0d0d0d] hover:!bg-[#151515] !text-white">
+                    <mat-icon>menu</mat-icon>
+                    <span class="ml-2">Opciones de Gestión</span>
+                </button>
+                <mat-menu #menu="matMenu">
+                    <button mat-menu-item>
+                        <mat-icon>settings</mat-icon>
+                        <span>Ajustes</span>
+                    </button>
+                    <button mat-menu-item>
+                        <mat-icon>share</mat-icon>
+                        <span>Compartir</span>
+                    </button>
+                    <mat-divider></mat-divider>
+                    <button mat-menu-item class="!text-red-400">
+                        <mat-icon class="!text-red-400">delete</mat-icon>
+                        <span>Eliminar permanentemente</span>
+                    </button>
+                </mat-menu>
+            </app-card>
+        </div>
+
+        <!-- Material Integration -->
+        <app-card title="Integración Material" subtitle="Componentes nativos con estilo Nexus">
+            <div class="space-y-6">
+                <div>
+                   <h3 class="text-[10px] font-bold text-[#707070] uppercase tracking-[0.2em] mb-4">Utility Tooltips</h3>
+                   <div class="flex gap-4">
+                        <button mat-mini-fab color="primary" matTooltip="Añadir nuevo registro" matTooltipPosition="above">
+                            <mat-icon>add</mat-icon>
+                        </button>
+                        <button mat-mini-fab color="accent" matTooltip="Editar información" matTooltipPosition="right">
+                            <mat-icon>edit</mat-icon>
+                        </button>
+                        <button mat-mini-fab class="!bg-red-500/10 !text-red-400 border border-red-500/20" matTooltip="Eliminar" matTooltipPosition="below">
+                            <mat-icon>delete</mat-icon>
+                        </button>
+                   </div>
+                </div>
+
+                <div class="pt-6 border-t border-[#1f1f1f]">
+                    <h3 class="text-[10px] font-bold text-[#707070] uppercase tracking-[0.2em] mb-4">Material Raised Buttons</h3>
+                    <div class="flex flex-wrap gap-2">
+                        <button mat-raised-button color="primary">Primary</button>
+                        <button mat-raised-button color="accent">Accent</button>
+                        <button mat-raised-button color="warn">Warn</button>
+                        <button mat-raised-button disabled>Disabled</button>
+                    </div>
+                </div>
+            </div>
+        </app-card>
     </div>
-
-    <div class="flex flex-wrap gap-4 mt-4">
-      <button mat-flat-button color="primary">Flat Button</button>
-      <button mat-stroked-button color="primary">Stroked Button</button>
-      <button mat-icon-button color="primary">
-        <mat-icon>favorite</mat-icon>
-      </button>
-      <button mat-fab color="primary">
-        <mat-icon>add</mat-icon>
-      </button>
-      <button mat-mini-fab color="accent">
-        <mat-icon>edit</mat-icon>
-      </button>
-    </div>
-  </app-card>
-
-  <app-card title="Dialog" subtitle="Abre un modal dialog">
-    <button mat-raised-button color="primary" (click)="openDialog()">
-      <mat-icon>open_in_new</mat-icon>
-      Abrir Dialog
-    </button>
-  </app-card>
-
-  <app-card title="Snackbar" subtitle="Notificaciones temporales">
-    <div class="flex gap-4">
-      <button mat-raised-button (click)="showSnackbar('Snackbar básico')">Snackbar Simple</button>
-      <button
-        mat-raised-button
-        color="primary"
-        (click)="showSnackbar('¡Operación exitosa!', 'success')"
-      >
-        Snackbar Success
-      </button>
-      <button mat-raised-button color="warn" (click)="showSnackbar('¡Error!', 'error')">
-        Snackbar Error
-      </button>
-    </div>
-  </app-card>
-
-  <app-card title="Menu" subtitle="Menús desplegables">
-    <button mat-raised-button [matMenuTriggerFor]="menu">
-      <mat-icon>menu</mat-icon>
-      Abrir Menú
-    </button>
-    <mat-menu #menu="matMenu">
-      <button mat-menu-item>
-        <mat-icon>dialpad</mat-icon>
-        <span>Opción 1</span>
-      </button>
-      <button mat-menu-item>
-        <mat-icon>voicemail</mat-icon>
-        <span>Opción 2</span>
-      </button>
-      <button mat-menu-item disabled>
-        <mat-icon>notifications_off</mat-icon>
-        <span>Opción Deshabilitada</span>
-      </button>
-    </mat-menu>
-  </app-card>
-
-  <app-card title="Tooltip" subtitle="Información al pasar el mouse">
-    <div class="flex gap-4">
-      <button mat-raised-button matTooltip="Tooltip básico">Hover me</button>
-      <button mat-raised-button matTooltip="Tooltip arriba" matTooltipPosition="above">
-        Tooltip Arriba
-      </button>
-      <button mat-raised-button matTooltip="Tooltip derecha" matTooltipPosition="right">
-        Tooltip Derecha
-      </button>
-    </div>
-  </app-card>
+  </div>
 </div>
+
