@@ -10,7 +10,6 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatRadioModule } from '@angular/material/radio';
 import { MatChipsModule } from '@angular/material/chips';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
-import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatIconModule } from '@angular/material/icon';
 import {
   CardComponent,
@@ -19,7 +18,6 @@ import {
   SelectComponent,
   DatepickerComponent,
 } from '../../../shared/components';
-import { CustomDatePipe } from '../../../shared/pipes/custom-date.pipe';
 import { CurrencyPipe } from '../../../shared/pipes/currency.pipe';
 import {
   integerValidator,
@@ -34,6 +32,7 @@ import { NumericInputDirective } from '../../../shared/directives/numeric-input.
 import { IntegerInputDirective } from '../../../shared/directives/integer-input.directive';
 import { MoneyInputDirective } from '../../../shared/directives/money-input.directive';
 import { PhoneInputDirective } from '../../../shared/directives/phone-input.directive';
+import { ToastService } from '../../../shared/services/toast.service';
 
 interface Country {
   code: string;
@@ -60,7 +59,6 @@ interface Category {
     MatRadioModule,
     MatChipsModule,
     MatProgressSpinnerModule,
-    MatSnackBarModule,
     MatIconModule,
     CardComponent,
     ButtonComponent,
@@ -101,7 +99,7 @@ export class FormsDemoPage implements OnInit {
 
   constructor(
     private fb: FormBuilder,
-    private snackBar: MatSnackBar,
+    private toast: ToastService,
   ) {
     this.mainForm = this.fb.group({
       // Datos personales
@@ -141,10 +139,7 @@ export class FormsDemoPage implements OnInit {
         this.submittedData = this.mainForm.value;
         this.isSubmitting = false;
 
-        this.snackBar.open('Formulario enviado correctamente', 'Cerrar', {
-          duration: 3000,
-          panelClass: ['snackbar-success'],
-        });
+        this.toast.success('Formulario enviado correctamente');
 
         console.log('Form submitted:', this.submittedData);
       }, 1500);
@@ -154,10 +149,7 @@ export class FormsDemoPage implements OnInit {
         this.mainForm.get(key)?.markAsTouched();
       });
 
-      this.snackBar.open('Por favor, complete todos los campos requeridos', 'Cerrar', {
-        duration: 3000,
-        panelClass: ['snackbar-error'],
-      });
+      this.toast.error('Por favor, complete todos los campos requeridos');
     }
   }
 
@@ -169,9 +161,7 @@ export class FormsDemoPage implements OnInit {
     });
     this.submittedData = null;
 
-    this.snackBar.open('Formulario limpiado', 'Cerrar', {
-      duration: 2000,
-    });
+    this.toast.info('Formulario limpiado');
   }
 
   getCountryName(code: string): string {

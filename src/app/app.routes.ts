@@ -16,36 +16,25 @@ export const routes: Routes = [
       {
         path: 'dashboard',
         loadComponent: () =>
-          import('./features/dashboard/presentation/dashboard.page').then(
-            (m) => m.DashboardPage
-          ),
+          import('./features/dashboard/presentation/dashboard.page').then((m) => m.DashboardPage),
       },
       {
         path: 'components',
         loadComponent: () =>
           import('./features/components-demo/presentation/components-demo.page').then(
-            (m) => m.ComponentsDemoPage
+            (m) => m.ComponentsDemoPage,
           ),
       },
       {
         path: 'forms',
         loadComponent: () =>
-          import('./features/forms-demo/presentation/forms-demo.page').then(
-            (m) => m.FormsDemoPage
-          ),
+          import('./features/forms-demo/presentation/forms-demo.page').then((m) => m.FormsDemoPage),
       },
       {
         path: 'tables',
         loadComponent: () =>
           import('./features/tables-demo/presentation/tables-demo.page').then(
-            (m) => m.TablesDemoPage
-          ),
-      },
-      {
-        path: 'ui-demo',
-        loadComponent: () =>
-          import('./features/ui-demo/presentation/ui-demo.page').then(
-            (m) => m.UiDemoPage
+            (m) => m.TablesDemoPage,
           ),
       },
     ],

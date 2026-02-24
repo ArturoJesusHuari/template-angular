@@ -5,3 +5,4 @@ export { ButtonComponent, type ButtonVariant, type ButtonSize } from './button/b
 export { BadgeComponent, type BadgeVariant, type BadgeSize } from './badge/badge.component';
 export { SelectComponent } from './select/select.component';
 export { DatepickerComponent } from './datepicker/datepicker.component';
+export { ToastComponent, type ToastData } from './toast/toast.component';

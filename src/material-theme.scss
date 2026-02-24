@@ -44,45 +44,47 @@ $custom-neutral-palette: (
 
 html {
   height: 100%;
-  
+
   // Configuración de tema oscuro con Material 3
-  @include mat.theme((
-    color: (
-      theme-type: dark,
-      primary: $custom-green-palette,
-      tertiary: $custom-neutral-palette,
-    ),
-    typography: (
-      brand-family: 'Inter, Roboto, sans-serif',
-      plain-family: 'Inter, Roboto, sans-serif',
-    ),
-    density: 0,
-  ));
-  
+  @include mat.theme(
+    (
+      color: (
+        theme-type: dark,
+        primary: $custom-green-palette,
+        tertiary: $custom-neutral-palette,
+      ),
+      typography: (
+        brand-family: 'Inter, Roboto, sans-serif',
+        plain-family: 'Inter, Roboto, sans-serif',
+      ),
+      density: 0,
+    )
+  );
+
   // Variables CSS personalizadas para tema Supabase-like
-  --bg-primary: #0f0f0f;           // Fondo principal (casi negro)
-  --bg-surface: #1a1a1a;           // Superficies (cards, panels)
-  --bg-surface-hover: #242424;     // Hover en superficies
-  --bg-input: #1f1f1f;             // Fondo de inputs
-  --bg-input-focus: #242424;       // Fondo de inputs en focus
-  
-  --border-subtle: #2a2a2a;        // Bordes sutiles
-  --border-default: #353535;       // Bordes por defecto
-  --border-focus: #3dc57f;         // Bordes en focus (accent verde)
-  
-  --text-primary: #f0f0f0;         // Texto principal (alto contraste)
-  --text-secondary: #a0a0a0;       // Texto secundario
-  --text-tertiary: #707070;        // Texto terciario (hints, placeholders)
-  --text-disabled: #505050;        // Texto deshabilitado
-  
-  --accent-primary: #3dc57f;       // Accent verde sobrio (acciones primarias)
-  --accent-hover: #5ee299;         // Accent hover
-  --accent-pressed: #00a766;       // Accent pressed
-  
-  --error: #ff5555;                // Error
-  --warning: #ffb86c;              // Warning
-  --success: #3dc57f;              // Success
-  
+  --bg-primary: #0f0f0f; // Fondo principal (casi negro)
+  --bg-surface: #1a1a1a; // Superficies (cards, panels)
+  --bg-surface-hover: #242424; // Hover en superficies
+  --bg-input: #1f1f1f; // Fondo de inputs
+  --bg-input-focus: #242424; // Fondo de inputs en focus
+
+  --border-subtle: #2a2a2a; // Bordes sutiles
+  --border-default: #353535; // Bordes por defecto
+  --border-focus: #3dc57f; // Bordes en focus (accent verde)
+
+  --text-primary: #f0f0f0; // Texto principal (alto contraste)
+  --text-secondary: #a0a0a0; // Texto secundario
+  --text-tertiary: #707070; // Texto terciario (hints, placeholders)
+  --text-disabled: #505050; // Texto deshabilitado
+
+  --accent-primary: #3dc57f; // Accent verde sobrio (acciones primarias)
+  --accent-hover: #5ee299; // Accent hover
+  --accent-pressed: #00a766; // Accent pressed
+
+  --error: #ff5555; // Error
+  --warning: #ffb86c; // Warning
+  --success: #3dc57f; // Success
+
   --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.3);
   --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.4);
   --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.5);
@@ -90,14 +92,14 @@ html {
 
 body {
   color-scheme: dark;
-  
+
   background-color: var(--bg-primary);
   color: var(--text-primary);
   font-family: 'Inter', 'Roboto', sans-serif;
-  
+
   margin: 0;
   height: 100%;
-  
+
   // Sobrescribir variables de Material para consistencia
   --mat-sys-surface: var(--bg-surface);
   --mat-sys-on-surface: var(--text-primary);
@@ -118,18 +120,18 @@ body {
   color: #000000 !important;
   font-weight: 600;
   box-shadow: 0 2px 4px rgba(61, 197, 127, 0.3);
-  
+
   &:hover:not([disabled]) {
     --mdc-filled-button-container-color: #5ee299 !important;
     background-color: #5ee299 !important;
     box-shadow: 0 4px 8px rgba(61, 197, 127, 0.4);
   }
-  
+
   &:active:not([disabled]) {
     --mdc-filled-button-container-color: #00a766 !important;
     background-color: #00a766 !important;
   }
-  
+
   &[disabled] {
     opacity: 0.4;
     box-shadow: none;
@@ -146,18 +148,18 @@ body {
   color: #ffffff !important;
   font-weight: 600;
   box-shadow: 0 2px 4px rgba(59, 130, 246, 0.3);
-  
+
   &:hover:not([disabled]) {
     --mdc-filled-button-container-color: #60a5fa !important;
     background-color: #60a5fa !important;
     box-shadow: 0 4px 8px rgba(59, 130, 246, 0.4);
   }
-  
+
   &:active:not([disabled]) {
     --mdc-filled-button-container-color: #2563eb !important;
     background-color: #2563eb !important;
   }
-  
+
   &[disabled] {
     opacity: 0.4;
     box-shadow: none;
@@ -174,18 +176,18 @@ body {
   color: #ffffff !important;
   font-weight: 600;
   box-shadow: 0 2px 4px rgba(239, 68, 68, 0.3);
-  
+
   &:hover:not([disabled]) {
     --mdc-filled-button-container-color: #f87171 !important;
     background-color: #f87171 !important;
     box-shadow: 0 4px 8px rgba(239, 68, 68, 0.4);
   }
-  
+
   &:active:not([disabled]) {
     --mdc-filled-button-container-color: #dc2626 !important;
     background-color: #dc2626 !important;
   }
-  
+
   &[disabled] {
     opacity: 0.4;
     box-shadow: none;
@@ -199,17 +201,17 @@ body {
   border: 1px solid var(--border-default) !important;
   color: var(--text-primary) !important;
   background-color: transparent !important;
-  
+
   &:hover:not([disabled]) {
     --mdc-outlined-button-outline-color: var(--accent-primary) !important;
     border-color: var(--accent-primary) !important;
     background-color: rgba(61, 197, 127, 0.1) !important;
   }
-  
+
   &:active:not([disabled]) {
     background-color: rgba(61, 197, 127, 0.2) !important;
   }
-  
+
   &[disabled] {
     opacity: 0.4;
   }
@@ -219,11 +221,11 @@ body {
 .mat-mdc-button {
   --mdc-text-button-label-text-color: var(--text-primary) !important;
   color: var(--text-primary) !important;
-  
+
   &:hover:not([disabled]) {
     background-color: var(--bg-surface-hover) !important;
   }
-  
+
   &[disabled] {
     opacity: 0.4;
   }
@@ -233,21 +235,21 @@ body {
 .mat-mdc-icon-button {
   --mdc-icon-button-icon-color: var(--text-primary) !important;
   color: var(--text-primary) !important;
-  
+
   &:hover:not([disabled]) {
     background-color: var(--bg-surface-hover) !important;
   }
-  
+
   &.mat-primary {
     --mdc-icon-button-icon-color: var(--accent-primary) !important;
     color: var(--accent-primary) !important;
   }
-  
+
   &.mat-warn {
     --mdc-icon-button-icon-color: var(--error) !important;
     color: var(--error) !important;
   }
-  
+
   &[disabled] {
     opacity: 0.4;
   }
@@ -273,7 +275,7 @@ body {
 .mat-mdc-menu-panel.mat-mdc-menu-panel,
 .mat-mdc-select-panel,
 .mat-select-panel {
-  background-color: #1a1a1a !important; 
+  background-color: #1a1a1a !important;
   background: #1a1a1a !important;
   border: 1px solid var(--border-subtle) !important;
   box-shadow: var(--shadow-lg) !important;
@@ -293,7 +295,7 @@ body {
   --mdc-outlined-text-field-container-color: var(--bg-input) !important;
   --mdc-outlined-text-field-focus-outline-color: var(--accent-primary) !important;
   --mdc-outlined-text-field-outline-color: var(--border-subtle) !important;
-  
+
   // Asegurar que el fondo no sea transparente
   .mat-mdc-text-field-wrapper {
     background-color: var(--bg-input) !important;
@@ -313,9 +315,9 @@ body {
   color: var(--text-primary) !important;
   height: 44px !important;
   padding: 0 16px !important;
-  
+
   // Iconos
-  .mat-icon, 
+  .mat-icon,
   .mat-mdc-menu-item-icon {
     margin-right: 12px !important;
     color: var(--text-secondary) !important;
@@ -331,15 +333,15 @@ body {
     font-size: 14px !important;
     font-weight: 500 !important;
   }
-  
+
   // Hover state
   &:hover:not([disabled]),
   &.cdk-program-focused:not([disabled]),
   &.cdk-visual-focused:not([disabled]),
   &.cdk-focused:not([disabled]) {
     background-color: var(--bg-surface-hover) !important;
-    
-    .mat-icon, 
+
+    .mat-icon,
     .mat-mdc-menu-item-icon,
     .mdc-list-item__primary-text,
     .mat-menu-item-text {
@@ -377,5 +379,38 @@ body {
   border: 1px solid #520000 !important;
 }
 
+// Estilos para el nuevo Toast Reutilizable Premium
+.toast-container {
+  &.mat-mdc-snack-bar-container {
+    .mdc-snackbar__surface {
+      background: rgba(17, 17, 17, 0.9) !important;
+      backdrop-filter: blur(12px) !important;
+      border: 1px solid rgba(42, 42, 42, 0.7) !important;
+      border-radius: 12px !important;
+      box-shadow: 
+        0 4px 6px -1px rgba(0, 0, 0, 0.1),
+        0 10px 15px -3px rgba(0, 0, 0, 0.5) !important;
+      padding: 12px 18px !important;
+      min-width: 340px !important;
+      max-width: 450px !important;
+      overflow: hidden !important;
+    }
+  }
+}
 
-
+.toast-panel-success .mdc-snackbar__surface { 
+  border-left: 4px solid #3dc57f !important;
+  box-shadow: 0 0 20px -5px rgba(61, 197, 127, 0.2) !important;
+}
+.toast-panel-error .mdc-snackbar__surface { 
+  border-left: 4px solid #ff5555 !important;
+  box-shadow: 0 0 20px -5px rgba(255, 85, 85, 0.2) !important;
+}
+.toast-panel-warning .mdc-snackbar__surface { 
+  border-left: 4px solid #ffb86c !important;
+  box-shadow: 0 0 20px -5px rgba(255, 184, 108, 0.2) !important;
+}
+.toast-panel-info .mdc-snackbar__surface { 
+  border-left: 4px solid #3b82f6 !important;
+  box-shadow: 0 0 20px -5px rgba(59, 130, 246, 0.2) !important;
+}

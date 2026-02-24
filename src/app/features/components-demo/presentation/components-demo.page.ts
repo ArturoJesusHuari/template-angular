@@ -3,7 +3,6 @@ import { CommonModule } from '@angular/common';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatDialog, MatDialogModule } from '@angular/material/dialog';
-import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatDividerModule } from '@angular/material/divider';
@@ -14,6 +13,7 @@ import { BadgeComponent } from '../../../shared/components/badge/badge.component
 import { DatepickerComponent } from '../../../shared/components/datepicker/datepicker.component';
 import { DaterangePickerComponent } from '../../../shared/components/daterange-picker/daterange-picker.component';
 import { ReactiveFormsModule, FormGroup, FormControl } from '@angular/forms';
+import { ToastService } from '../../../shared/services/toast.service';
 
 @Component({
   selector: 'app-components-demo',
@@ -23,7 +23,6 @@ import { ReactiveFormsModule, FormGroup, FormControl } from '@angular/forms';
     MatButtonModule,
     MatIconModule,
     MatDialogModule,
-    MatSnackBarModule,
     MatMenuModule,
     MatTooltipModule,
     MatDividerModule,
@@ -51,20 +50,33 @@ export class ComponentsDemoPage {
 
   constructor(
     private dialog: MatDialog,
-    private snackBar: MatSnackBar,
+    private toast: ToastService,
   ) {}
 
   openDialog() {
     this.dialog.open(DialogComponent);
   }
 
-  showSnackbar(message: string, type: string = 'default') {
-    this.snackBar.open(message, 'Cerrar', {
-      duration: 3000,
-      horizontalPosition: 'end',
-      verticalPosition: 'top',
-      panelClass:
-        type === 'success' ? 'snackbar-success' : type === 'error' ? 'snackbar-error' : '',
-    });
+  showSnackbar(
+    message: string,
+    type: 'success' | 'error' | 'warning' | 'info' | 'default' = 'default',
+  ) {
+    switch (type) {
+      case 'success':
+        this.toast.success(message);
+        break;
+      case 'error':
+        this.toast.error(message);
+        break;
+      case 'warning':
+        this.toast.warning(message);
+        break;
+      case 'info':
+        this.toast.info(message);
+        break;
+      default:
+        this.toast.info(message);
+        break;
+    }
   }
 }

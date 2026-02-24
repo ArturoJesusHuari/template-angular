@@ -250,111 +250,60 @@
 
     <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
       <!-- Interactive Elements -->
-      <div class="flex flex-col gap-8">
-        <app-card title="Diálogos & Feedback" subtitle="Modales y notificaciones">
-          <div class="flex flex-col gap-4">
-            <app-button
-              variant="primary"
-              (click)="openDialog()"
-              icon="open_in_new"
-              [fullWidth]="true"
-            >
-              Lanzar Diálogo
-            </app-button>
-
-            <div class="flex gap-2">
-              <app-button
-                variant="secondary"
-                (click)="showSnackbar('Operación exitosa', 'success')"
-                class="flex-1"
-              >
-                Success Toast
-              </app-button>
-              <app-button
-                variant="danger"
-                (click)="showSnackbar('Fallo en el servidor', 'error')"
-                class="flex-1"
-              >
-                Error Toast
-              </app-button>
-            </div>
-          </div>
-        </app-card>
-
-        <app-card title="Menú Contextual" subtitle="Opciones desplegables">
-          <button
-            mat-stroked-button
-            [matMenuTriggerFor]="menu"
-            class="!w-full !py-6 !rounded-xl !border-[#1f1f1f] !bg-[#0d0d0d] hover:!bg-[#151515] !text-white"
+      <app-card title="Diálogos & Feedback" subtitle="Modales y notificaciones">
+        <div class="flex flex-col gap-4">
+          <app-button
+            variant="primary"
+            (click)="openDialog()"
+            icon="open_in_new"
+            [fullWidth]="true"
           >
-            <mat-icon>menu</mat-icon>
-            <span class="ml-2">Opciones de Gestión</span>
-          </button>
-          <mat-menu #menu="matMenu">
-            <button mat-menu-item>
-              <mat-icon>settings</mat-icon>
-              <span>Ajustes</span>
-            </button>
-            <button mat-menu-item>
-              <mat-icon>share</mat-icon>
-              <span>Compartir</span>
-            </button>
-            <mat-divider></mat-divider>
-            <button mat-menu-item class="!text-red-400">
-              <mat-icon class="!text-red-400">delete</mat-icon>
-              <span>Eliminar permanentemente</span>
-            </button>
-          </mat-menu>
-        </app-card>
-      </div>
+            Lanzar Diálogo
+          </app-button>
 
-      <!-- Material Integration -->
-      <app-card title="Integración Material" subtitle="Componentes nativos con estilo Nexus">
-        <div class="space-y-6">
-          <div>
-            <h3 class="text-[10px] font-bold text-[#707070] uppercase tracking-[0.2em] mb-4">
-              Utility Tooltips
-            </h3>
-            <div class="flex gap-4">
-              <button
-                mat-mini-fab
-                color="primary"
-                matTooltip="Añadir nuevo registro"
-                matTooltipPosition="above"
-              >
-                <mat-icon>add</mat-icon>
-              </button>
-              <button
-                mat-mini-fab
-                color="accent"
-                matTooltip="Editar información"
-                matTooltipPosition="right"
-              >
-                <mat-icon>edit</mat-icon>
-              </button>
-              <button
-                mat-mini-fab
-                class="!bg-red-500/10 !text-red-400 border border-red-500/20"
-                matTooltip="Eliminar"
-                matTooltipPosition="below"
-              >
-                <mat-icon>delete</mat-icon>
-              </button>
-            </div>
-          </div>
-
-          <div class="pt-6 border-t border-[#1f1f1f]">
-            <h3 class="text-[10px] font-bold text-[#707070] uppercase tracking-[0.2em] mb-4">
-              Material Raised Buttons
-            </h3>
-            <div class="flex flex-wrap gap-2">
-              <button mat-raised-button color="primary">Primary</button>
-              <button mat-raised-button color="accent">Accent</button>
-              <button mat-raised-button color="warn">Warn</button>
-              <button mat-raised-button disabled>Disabled</button>
-            </div>
+          <div class="flex gap-2">
+            <app-button
+              variant="secondary"
+              (click)="showSnackbar('Operación exitosa', 'success')"
+              class="flex-1"
+            >
+              Success Toast
+            </app-button>
+            <app-button
+              variant="danger"
+              (click)="showSnackbar('Fallo en el servidor', 'error')"
+              class="flex-1"
+            >
+              Error Toast
+            </app-button>
           </div>
         </div>
+      </app-card>
+
+      <app-card title="Menú Contextual" subtitle="Opciones desplegables">
+        <button
+          mat-stroked-button
+          [matMenuTriggerFor]="menu"
+          class="!w-full !py-6 !rounded-xl !border-[#1f1f1f] !bg-[#0d0d0d] hover:!bg-[#151515] !text-white"
+        >
+          <mat-icon>menu</mat-icon>
+          <span class="ml-2">Opciones de Gestión</span>
+        </button>
+        <mat-menu #menu="matMenu">
+          <button mat-menu-item>
+            <mat-icon>settings</mat-icon>
+            <span>Ajustes</span>
+          </button>
+          <button mat-menu-item>
+            <mat-icon>share</mat-icon>
+            <span>Compartir</span>
+          </button>
+          <mat-divider></mat-divider>
+          <button mat-menu-item class="!text-red-400">
+            <mat-icon class="!text-red-400">delete</mat-icon>
+            <span>Eliminar permanentemente</span>
+          </button>
+        </mat-menu>
       </app-card>
     </div>
   </div>
