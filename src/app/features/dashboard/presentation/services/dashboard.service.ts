@@ -1,5 +1,5 @@
 import { Injectable, inject, signal, computed } from '@angular/core';
-import { DashboardStats, GetDashboardStats } from '../domain/dashboard.domain';
+import { DashboardStats, GetDashboardStats } from '../../domain/dashboard.domain';
 
 @Injectable()
 export class DashboardService {

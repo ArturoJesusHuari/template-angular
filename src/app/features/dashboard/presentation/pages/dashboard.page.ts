@@ -1,10 +1,10 @@
 import { Component, OnInit, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MatIconModule } from '@angular/material/icon';
-import { CardComponent, ButtonComponent, BadgeComponent } from '../../../shared/components';
-import { CurrencyPipe } from '../../../shared/pipes/currency.pipe';
-import { DashboardService } from './dashboard.service';
-import { GetDashboardStats } from '../domain/dashboard.domain';
+import { CardComponent, ButtonComponent, BadgeComponent } from '../../../../shared/components';
+import { CurrencyPipe } from '../../../../shared/pipes/currency.pipe';
+import { DashboardService } from '../services/dashboard.service';
+import { GetDashboardStats } from '../../domain/dashboard.domain';
 
 @Component({
   selector: 'app-dashboard',
